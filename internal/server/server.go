@@ -9,19 +9,15 @@ import (
 	"os"
 )
 
-type Server struct {
-}
-
 func NewServer() (*http.Server, error) {
 	port := os.Getenv("PORT")
 	if port == "" {
 		return nil, errors.New("can't get PORT in env")
 	}
 
-	server := &Server{}
 	serverHTTP := &http.Server{
 		Addr:    fmt.Sprintf("localhost:%s", port),
-		Handler: server.RegisterRoutes(),
+		Handler: RegisterRoutes(),
 	}
 	return serverHTTP, nil
 }

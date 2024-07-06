@@ -1,9 +1,10 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
+
+	"github.com.mloughton/crud/internal/dax"
 )
 
 func RegisterRoutes() http.Handler {
@@ -33,5 +34,12 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 		return
 	}
-	w.Write([]byte(fmt.Sprintf("recieved post: %s", r.Form.Get("input"))))
+	columns, err := dax.ParseInput(r.Form.Get("input"))
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, "Bad Request")
+		log.Print(err)
+		return
+	}
+	log.Println(*columns)
+	w.Write([]byte("recieved post"))
 }

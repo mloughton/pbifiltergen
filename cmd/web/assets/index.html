@@ -1,15 +1,16 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
-    <h1>test</h1>
 </head>
 <body>
+    <h1>test</h1>
     <textarea type="text" name="input" id="input" rows="10" cols="50"></textarea>
     <button hx-post="/input" hx-include="#input" hx-target="#output">
         Post 
     </button>
-    <textarea type="text" name="output" id="output" rows="10" cols="50"></textarea>
+    <pre><code type="text" name="output" id="output" rows="10" cols="50"></code></pre>
 </body>
 
 </html>

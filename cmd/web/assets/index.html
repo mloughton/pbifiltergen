@@ -5,12 +5,17 @@
     <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>test</h1>
-    <textarea type="text" name="input" id="input" rows="10" cols="50"></textarea>
-    <button hx-post="/input" hx-include="#input" hx-target="#output">
-        Post 
-    </button>
-    <pre><code type="text" name="output" id="output" rows="10" cols="50"></code></pre>
+    <section class="container">
+        <div id="col-1">
+            <textarea type="text" name="input" id="input"></textarea>
+            <button hx-post="/input" hx-include="#input" hx-target="#output">
+                Post 
+            </button>
+        </div>
+        <div id="col-2">
+            <pre name="output" id="output"></pre>
+        </div>
+    </section>
 </body>
 
 </html>

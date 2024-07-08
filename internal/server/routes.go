@@ -40,6 +40,10 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 		return
 	}
-	log.Println(*columns)
-	w.Write([]byte("recieved post"))
+	dax, err := dax.GenerateDax(columns)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	w.Write([]byte(dax))
 }

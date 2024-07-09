@@ -36,7 +36,9 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	columns, err := dax.ParseInput(r.Form.Get("input"))
 	if err != nil {
-		respondWithError(w, http.StatusBadRequest, "Bad Request")
+		// respondWithError(w, http.StatusBadRequest, "Bad Request")
+		w.Header().Add("HX-Retarget", "#error")
+		w.Write([]byte(err.Error()))
 		log.Print(err)
 		return
 	}

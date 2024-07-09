@@ -6,14 +6,22 @@
 </head>
 <body>
     <section class="container">
-        <div id="col-1">
-            <textarea type="text" name="input" id="input"></textarea>
+        <div class="inputbox">
+            <textarea class="scrollable" type="text" name="input" id="input"></textarea>
+        </div>
+        <div class="outputbox">
+            <pre class="scrollable" name="output" id="output"></pre>
+        </div>
+        <div class="buttonbox">
             <button hx-post="/input" hx-include="#input" hx-target="#output">
-                Post 
+                Generate 
             </button>
         </div>
-        <div id="col-2">
-            <pre name="output" id="output"></pre>
+        <div class="errorbox">
+            <pre name="error" id="error"></pre>
+        </div>
+        <div class="footer">
+
         </div>
     </section>
 </body>

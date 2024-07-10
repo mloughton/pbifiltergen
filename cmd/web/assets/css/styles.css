@@ -1,56 +1,68 @@
 *{
   margin: 0;
-  background-color: #111;
-  font-size: 12px;
+  background-color: #1e1e1e;
+  font-size: 12;
   color: #ccc;
+  font-family: 'Segoe UI';
 }
 
 body {
   margin:10;
 }
 
+h1 {
+  font-size: 36;
+}
+
 .container {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 4fr);
-  grid-template-rows: minmax(0, 9fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 8fr) minmax(0, 1fr) minmax(0, 1fr) auto;
   column-gap: 10px;
   row-gap: 10px;
   height: 100%;
   width: 100%;
 }
 
+.header {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
 .inputbox {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
 }
 
 .outputbox {
   grid-column-start: 3;
   grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
 .buttonbox {
   grid-column-start: 1;
   grid-column-end: 1;
-  grid-row-start: 2;
-  grid-row-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 3;
 }
 .errorbox {
   grid-column-start: 2;
   grid-column-end: 2;
-  grid-row-start: 2;
-  grid-row-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 3;
 }
 
 .footer {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
 }
 
 .scrollable {
@@ -58,15 +70,22 @@ body {
   overflow-y: auto;
 }
 
+
+
 textarea {
   padding: 10;
   width: 100%;
   height: 100%;
   tab-size: 4;
-
+  background-color: #252526;
+  font-family: monospace;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
+}
+
+::placeholder {
+  color: #459b42
 }
 
 pre {
@@ -74,16 +93,21 @@ pre {
   width: 100%;
   height: 100%;
   tab-size: 4;
-
+  background-color: #252526;
+  font-family: monospace;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
 }
 
+.error {
+  color: #f15959;
+}
+
 button {
   width: 100%;
   height: 100%;
-
+  font-weight: bold;
   font-size: 24;
   box-sizing: border-box;
   border: 2px solid #ccc;

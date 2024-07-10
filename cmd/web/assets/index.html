@@ -6,8 +6,11 @@
 </head>
 <body>
     <section class="container">
+        <div class="header">
+            <h1>Generate Filter Dax</h1>
+        </div>
         <div class="inputbox">
-            <textarea class="scrollable" type="text" name="input" id="input"></textarea>
+            <textarea class="scrollable" type="text" name="input" id="input" placeholder="// TABLE_NAME[COLUMN_NAME],COLUMN_TYPE"></textarea>
         </div>
         <div class="outputbox">
             <pre class="scrollable" name="output" id="output"></pre>
@@ -18,7 +21,7 @@
             </button>
         </div>
         <div class="errorbox">
-            <pre name="error" id="error"></pre>
+            <pre class="error" name="error" id="error"></pre>
         </div>
         <div class="footer">
 

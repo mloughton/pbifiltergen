@@ -1,4 +1,4 @@
-module github.com.mloughton/crud
+module github.com/mloughton/pbifiltergen
 
 go 1.22.4
 

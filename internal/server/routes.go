@@ -4,7 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com.mloughton/crud/internal/dax"
+	"github.com/mloughton/pbifiltergen/cmd/web/staticfs"
+	"github.com/mloughton/pbifiltergen/internal/dax"
 )
 
 func RegisterRoutes() http.Handler {
@@ -12,12 +13,21 @@ func RegisterRoutes() http.Handler {
 
 	mux.HandleFunc("GET /health", GetHealthHandler)
 
-	mux.Handle("/", http.FileServer(http.Dir("./cmd/web/assets")))
+	mux.HandleFunc("/", AppHandler)
 
 	mux.HandleFunc("POST /input", PostInputHandler)
 
 	mux.HandleFunc("GET /copy", GetCopyHandler)
 	return mux
+}
+
+func AppHandler(w http.ResponseWriter, r *http.Request) {
+	f, err := staticfs.StaticFiles.ReadFile("cmd/web/assets/index.html")
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	w.Write(f)
 }
 
 func GetHealthHandler(w http.ResponseWriter, r *http.Request) {

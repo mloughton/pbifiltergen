@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com.mloughton/crud/internal/server"
 	"github.com/joho/godotenv"
+	"github.com/mloughton/pbifiltergen/internal/server"
 )
 
 func main() {

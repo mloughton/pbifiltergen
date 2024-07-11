@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com.mloughton/crud/internal/server"
 	"github.com/joho/godotenv"
 )
@@ -8,7 +10,7 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		log.Printf("warning: assuming default configuration. .env unreadable: %v", err)
 	}
 
 	serverHTTP, err := server.NewServer()

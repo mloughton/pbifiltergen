@@ -12,7 +12,7 @@ import (
 func NewServer() (*http.Server, error) {
 	port := os.Getenv("PORT")
 	if port == "" {
-		return nil, errors.New("can't get PORT in env")
+		return nil, errors.New("PORT environment variabel not set")
 	}
 
 	serverHTTP := &http.Server{

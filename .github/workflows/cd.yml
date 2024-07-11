@@ -34,4 +34,4 @@ jobs:
         run: gcloud builds submit --tag europe-west2-docker.pkg.dev/pbifiltergen/pbifiltergen-ar-repo/pbifiltergen:latest .
 
       - name: Deploy to Cloud Run
-        run: gcloud run deploy notely --image europe-west2-docker.pkg.dev/pbifiltergen/pbifiltergen-ar-repo/pbifiltergen:latest --region europe-west2 --allow-unauthenticated --project pbifiltergen --max-instances=1
+        run: gcloud run deploy pbifiltergen --image europe-west2-docker.pkg.dev/pbifiltergen/pbifiltergen-ar-repo/pbifiltergen:latest --region europe-west2 --allow-unauthenticated --project pbifiltergen --max-instances=1

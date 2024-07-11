@@ -1,10 +1,11 @@
 package server
 
 import (
+	"io/fs"
 	"log"
 	"net/http"
 
-	"github.com/mloughton/pbifiltergen/cmd/web/staticfs"
+	embedfs "github.com/mloughton/pbifiltergen/cmd/web"
 	"github.com/mloughton/pbifiltergen/internal/dax"
 )
 
@@ -13,7 +14,7 @@ func RegisterRoutes() http.Handler {
 
 	mux.HandleFunc("GET /health", GetHealthHandler)
 
-	mux.HandleFunc("/", AppHandler)
+	mux.Handle("/", AppHandlerTest())
 
 	mux.HandleFunc("POST /input", PostInputHandler)
 
@@ -21,8 +22,15 @@ func RegisterRoutes() http.Handler {
 	return mux
 }
 
+func AppHandlerTest() http.Handler {
+	fs, err := fs.Sub(embedfs.StaticFiles, "assets")
+	if err != nil {
+		panic(err)
+	}
+	return http.FileServer(http.FS(fs))
+}
 func AppHandler(w http.ResponseWriter, r *http.Request) {
-	f, err := staticfs.StaticFiles.ReadFile("cmd/web/assets/index.html")
+	f, err := embedfs.StaticFiles.ReadFile("assets/index.html")
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return

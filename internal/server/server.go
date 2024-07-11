@@ -16,7 +16,7 @@ func NewServer() (*http.Server, error) {
 	}
 
 	serverHTTP := &http.Server{
-		Addr:              "localhost:8080",
+		Addr:              ":" + port,
 		Handler:           RegisterRoutes(),
 		ReadHeaderTimeout: time.Minute,
 	}

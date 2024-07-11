@@ -16,7 +16,7 @@ h1 {
 
 .container {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 3fr);
   grid-template-rows: minmax(0, 1fr) minmax(0, 8fr) minmax(0, 1fr) minmax(0, 1fr) auto;
   column-gap: 10px;
   row-gap: 10px;
@@ -26,7 +26,7 @@ h1 {
 
 .header {
   grid-column-start: 1;
-  grid-column-end: 4;
+  grid-column-end: 5;
   grid-row-start: 1;
   grid-row-end: 1;
 }
@@ -40,7 +40,7 @@ h1 {
 
 .outputbox {
   grid-column-start: 3;
-  grid-column-end: 3;
+  grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 3;
 }
@@ -58,6 +58,20 @@ h1 {
   grid-row-end: 3;
 }
 
+.copybox {
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
+.messagebox {
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
 .footer {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -69,8 +83,6 @@ h1 {
   resize: none;
   overflow-y: auto;
 }
-
-
 
 textarea {
   padding: 10;

@@ -15,6 +15,8 @@ func RegisterRoutes() http.Handler {
 	mux.Handle("/", http.FileServer(http.Dir("./cmd/web/assets")))
 
 	mux.HandleFunc("POST /input", PostInputHandler)
+
+	mux.HandleFunc("GET /copy", GetCopyHandler)
 	return mux
 }
 
@@ -48,4 +50,8 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write([]byte(dax))
+}
+
+func GetCopyHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("copied to clipboard"))
 }

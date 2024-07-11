@@ -13,7 +13,7 @@
             <textarea class="scrollable" type="text" name="input" id="input" placeholder="// TABLE_NAME[COLUMN_NAME],COLUMN_TYPE"></textarea>
         </div>
         <div class="outputbox">
-            <pre class="scrollable" name="output" id="output"></pre>
+            <pre class="scrollable" name="output" id="output" hx-trigger="click from:#copy" hx-get="/copy" hx-target="#message" hx-on::before-request="navigator.clipboard.writeText(this.innerHTML)"></pre>
         </div>
         <div class="buttonbox">
             <button hx-post="/input" hx-include="#input" hx-target="#output">
@@ -23,6 +23,17 @@
         <div class="errorbox">
             <pre class="error" name="error" id="error"></pre>
         </div>
+
+        <div class="copybox">
+            <button id="copy">
+                Copy
+            </button>
+        </div>
+
+        <div class="messagebox">
+            <pre name="message" id="message"></pre>
+        </div>
+
         <div class="footer">
 
         </div>

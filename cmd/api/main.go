@@ -18,6 +18,6 @@ func main() {
 		panic(err)
 	}
 
-	serverHTTP.ListenAndServe()
+	log.Fatal(serverHTTP.ListenAndServe())
 
 }

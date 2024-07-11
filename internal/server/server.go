@@ -3,7 +3,6 @@ package server
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -17,7 +16,7 @@ func NewServer() (*http.Server, error) {
 	}
 
 	serverHTTP := &http.Server{
-		Addr:              fmt.Sprintf(":%s", port),
+		Addr:              ":" + port,
 		Handler:           RegisterRoutes(),
 		ReadHeaderTimeout: time.Minute,
 	}

@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func NewServer() (*http.Server, error) {
@@ -16,8 +17,9 @@ func NewServer() (*http.Server, error) {
 	}
 
 	serverHTTP := &http.Server{
-		Addr:    fmt.Sprintf("localhost:%s", port),
-		Handler: RegisterRoutes(),
+		Addr:              fmt.Sprintf(":%s", port),
+		Handler:           RegisterRoutes(),
+		ReadHeaderTimeout: time.Minute,
 	}
 	return serverHTTP, nil
 }

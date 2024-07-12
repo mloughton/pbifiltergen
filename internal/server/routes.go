@@ -19,6 +19,8 @@ func RegisterRoutes() http.Handler {
 	mux.HandleFunc("POST /input", PostInputHandler)
 
 	mux.HandleFunc("GET /copy", GetCopyHandler)
+
+	mux.HandleFunc("PUT /reset", PutResetHandler)
 	return mux
 }
 
@@ -59,12 +61,12 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 		// respondWithError(w, http.StatusBadRequest, "Bad Request")
 		w.Header().Add("HX-Retarget", "#error")
 		w.Write([]byte(err.Error()))
-		log.Print(err)
 		return
 	}
 	dax, err := dax.GenerateDax(columns)
 	if err != nil {
-		log.Print(err)
+		w.Header().Add("HX-Retarget", "#error")
+		w.Write([]byte(err.Error()))
 		return
 	}
 	w.Write([]byte(dax))
@@ -72,4 +74,8 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 
 func GetCopyHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("copied to clipboard"))
+}
+
+func PutResetHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte{})
 }

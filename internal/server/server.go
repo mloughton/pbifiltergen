@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"errors"
+	"flag"
 	"log"
 	"net/http"
 	"os"
@@ -10,13 +11,21 @@ import (
 )
 
 func NewServer() (*http.Server, error) {
+	host := ""
+	local := flag.Bool("local", false, "Enable local mode")
+	flag.Parse()
+
+	if *local {
+		host = "localhost"
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
-		return nil, errors.New("PORT environment variabel not set")
+		return nil, errors.New("PORT environment variable not set")
 	}
 
 	serverHTTP := &http.Server{
-		Addr:              ":" + port,
+		Addr:              host + ":" + port,
 		Handler:           RegisterRoutes(),
 		ReadHeaderTimeout: time.Minute,
 	}

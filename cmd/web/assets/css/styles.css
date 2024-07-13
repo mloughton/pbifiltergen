@@ -4,84 +4,155 @@
   font-size: 12;
   color: #ccc;
   font-family: 'Segoe UI';
+  box-sizing: border-box;
+  border: unset
 }
 
 body {
-  margin:10;
+  margin-top: 10;
+  margin-bottom: 10;
 }
 
-h1 {
+.title {
   font-size: 36;
+  font-weight: bold;
 }
 
-.container {
+.headertitle {
+  font-size: 24;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 20;
+}
+
+h2 {
+  font-size: 20;
+  font-weight: normal;
+}
+
+.app {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 3fr);
-  grid-template-rows: minmax(0, 1fr) minmax(0, 8fr) minmax(0, 1fr) minmax(0, 1fr) auto;
-  column-gap: 10px;
-  row-gap: 10px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 3fr) minmax(0, 15fr) minmax(0, 2fr) auto;
   height: 100%;
   width: 100%;
 }
 
 .header {
-  grid-column-start: 1;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  margin-left: 10;
+  margin-right: 10;
 }
 
-.inputbox {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 2;
+.inputcol {
+  grid-column: 1;
+  grid-row: 2;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr)  minmax(0, 9fr);
+  height: 100%;
+  width: 100%;
 }
 
-.outputbox {
-  grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-start: 2;
-  grid-row-end: 3;
+.inputheader {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 10;
+  border-bottom: 1px solid #ccc;
+
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 4fr);
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  width: 100%;
+}
+
+.inputtitle {
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .buttonbox {
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-column: 2;
+  grid-row: 1;
 }
+
 .errorbox {
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.inputbox {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.outputcol {
+  grid-column: 2;
+  grid-row: 2;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr)  minmax(0, 9fr);
+  height: 100%;
+  width: 100%;
+}
+
+.outputheader {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 10;
+  border-bottom: 1px solid #ccc;
+
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 4fr);
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  width: 100%;
+}
+
+.inputtitle {
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .copybox {
-  grid-column-start: 3;
-  grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .messagebox {
-  grid-column-start: 4;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.outputbox {
+  grid-column: 1;
+  grid-row: 2;
 }
 
 .footer {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 4;
+  grid-column: 1 / 3;
+  grid-row: 3;
+  margin-left: 10;
+  margin-right: 10;
 }
 
 .scrollable {
   resize: none;
   overflow-y: auto;
+}
+
+.border {
+  border: 1px solid #ccc;
+}
+
+textarea:focus {
+  outline: none
 }
 
 textarea {
@@ -91,9 +162,6 @@ textarea {
   tab-size: 4;
   background-color: #252526;
   font-family: monospace;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
 }
 
 ::placeholder {
@@ -107,9 +175,6 @@ pre {
   tab-size: 4;
   background-color: #252526;
   font-family: monospace;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
 }
 
 .error {
@@ -120,8 +185,5 @@ button {
   width: 100%;
   height: 100%;
   font-weight: bold;
-  font-size: 24;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  font-size: 16;
 }

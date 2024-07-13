@@ -5,38 +5,59 @@
     <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
 </head>
 <body>
-    <section class="container">
+    <section class="app">
+
         <div class="header">
-            <h1>Generate Filter Dax</h1>
+            <div class="title">
+                pbifiltergen
+            </div>
+            <div class="subtitle">
+                generate DAX that creates filtered Power BI dashboard links
+            </div>
         </div>
-        <div class="inputbox">
-            <textarea class="scrollable" type="text" name="input" id="input" placeholder="// TABLE_NAME[COLUMN_NAME],COLUMN_TYPE"></textarea>
-        </div>
-        <div class="outputbox">
-            <pre class="scrollable" name="output" id="output" hx-trigger="click from:#copy" hx-get="/copy" hx-target="#message" hx-on::before-request="navigator.clipboard.writeText(this.innerHTML)"></pre>
-        </div>
-        <div class="buttonbox">
-            <button id="generate" name="generate" hx-post="/input" hx-include="#input" hx-target="#output">
-                Generate 
-            </button>
-        </div>
-        <div class="errorbox">
-            <pre class="error" name="error" id="error" hx-trigger="click from:#generate" hx-put="/reset"></pre>
+        <div class="inputcol border">
+            <div class="inputheader">
+                <div class="inputtitle headertitle">
+                    columns
+                </div>
+                <div class="buttonbox">
+                    <button class="border" id="generate" name="generate" hx-post="/input" hx-include="#input" hx-target="#output">
+                        Generate 
+                    </button>
+                </div>
+                <div class="errorbox">
+                    <pre class="error" name="error" id="error" hx-trigger="click from:#generate" hx-put="/reset"></pre>
+                </div>
+            </div>
+            <div class="inputbox">
+                <textarea class="scrollable" type="text" name="input" id="input" placeholder="// TABLE_NAME[COLUMN_NAME],COLUMN_TYPE"></textarea>
+            </div>
         </div>
 
-        <div class="copybox">
-            <button id="copy">
-                Copy
-            </button>
-        </div>
+        <div class="outputcol border">
+            <div class="outputheader">
+                <div class="outputtitle headertitle">
+                    DAX
+                </div>
+                <div class="copybox">
+                    <button class="border" id="copy">
+                        Copy
+                    </button>
+                </div>
+        
+                <div class="messagebox">
+                    <pre name="message" id="message" hx-trigger="click from:#generate" hx-put="/reset"></pre>
+                </div>
+            </div>
 
-        <div class="messagebox">
-            <pre name="message" id="message" hx-trigger="click from:#generate" hx-put="/reset"></pre>
+            <div class="outputbox">
+                <pre class="scrollable" name="output" id="output" hx-trigger="click from:#copy" hx-get="/copy" hx-target="#message" hx-on::before-request="navigator.clipboard.writeText(this.innerHTML)"></pre>
+            </div>
         </div>
 
         <div class="footer">
 
-        </div>
+        </div> 
     </section>
 </body>
 

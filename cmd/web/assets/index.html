@@ -21,12 +21,17 @@
                     columns
                 </div>
                 <div class="buttonbox">
-                    <button class="border" id="generate" name="generate" hx-post="/input" hx-include="#input" hx-target="#output">
+                    <button class="border" id="generate" name="generate" 
+                        hx-post="/input" 
+                        hx-include="#input" 
+                        hx-target="#output" 
+                        hx-on::before-request="document.getElementById('error').innerHTML = ''
+                        document.getElementById('message').innerHTML = ''">
                         Generate 
                     </button>
                 </div>
                 <div class="errorbox">
-                    <pre class="error" name="error" id="error" hx-trigger="click from:#generate" hx-put="/reset"></pre>
+                    <pre class="error" name="error" id="error"></pre>
                 </div>
             </div>
             <div class="inputbox">
@@ -46,12 +51,17 @@
                 </div>
         
                 <div class="messagebox">
-                    <pre name="message" id="message" hx-trigger="click from:#generate" hx-put="/reset"></pre>
+                    <pre name="message" id="message"></pre>
                 </div>
             </div>
 
             <div class="outputbox">
-                <pre class="scrollable" name="output" id="output" hx-trigger="click from:#copy" hx-get="/copy" hx-target="#message" hx-on::before-request="navigator.clipboard.writeText(this.innerHTML)"></pre>
+                <pre class="scrollable" name="output" id="output" 
+                    hx-trigger="click from:#copy" 
+                    hx-get="/copy" 
+                    hx-target="#message" 
+                    hx-on::before-request="navigator.clipboard.writeText(this.innerHTML)">
+                </pre>
             </div>
         </div>
 

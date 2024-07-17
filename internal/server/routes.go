@@ -18,9 +18,6 @@ func RegisterRoutes() http.Handler {
 
 	mux.HandleFunc("POST /input", PostInputHandler)
 
-	mux.HandleFunc("GET /copy", GetCopyHandler)
-
-	mux.HandleFunc("PUT /reset", PutResetHandler)
 	return mux
 }
 
@@ -70,12 +67,4 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write([]byte(dax))
-}
-
-func GetCopyHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("copied to clipboard"))
-}
-
-func PutResetHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte{})
 }

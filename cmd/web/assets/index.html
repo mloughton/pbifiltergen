@@ -2,7 +2,18 @@
 
 <head>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+    <script src="js/htmx.min.js"></script>
+    <script>
+        function clear() {
+            document.getElementById('error').innerHTML = '';
+            document.getElementById('message').innerHTML = '';
+        }
+
+        function copy(text) {
+            navigator.clipboard.writeText(document.getElementById('output').innerHTML);
+            document.getElementById('message').innerHTML = 'copied to clipboard';
+        }
+    </script>
 </head>
 <body>
     <section class="app">
@@ -25,13 +36,12 @@
                         hx-post="/input" 
                         hx-include="#input" 
                         hx-target="#output" 
-                        hx-on::before-request="document.getElementById('error').innerHTML = ''
-                        document.getElementById('message').innerHTML = ''">
+                        hx-on::before-request="clear()">
                         Generate 
                     </button>
                 </div>
                 <div class="errorbox">
-                    <pre class="error" name="error" id="error"></pre>
+                    <p class="error message" name="error" id="error"></p>
                 </div>
             </div>
             <div class="inputbox">
@@ -45,23 +55,18 @@
                     DAX
                 </div>
                 <div class="copybox">
-                    <button class="border" id="copy">
+                    <button class="border" id="copy" hx-on:click="copy()">
                         Copy
                     </button>
                 </div>
         
                 <div class="messagebox">
-                    <pre name="message" id="message"></pre>
+                    <p class="message" name="message" id="message"></p>
                 </div>
             </div>
 
             <div class="outputbox">
-                <pre class="scrollable" name="output" id="output" 
-                    hx-trigger="click from:#copy" 
-                    hx-get="/copy" 
-                    hx-target="#message" 
-                    hx-on::before-request="navigator.clipboard.writeText(this.innerHTML)">
-                </pre>
+                <pre class="scrollable" name="output" id="output"></pre>
             </div>
         </div>
 

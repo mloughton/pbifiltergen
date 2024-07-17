@@ -34,9 +34,9 @@ func ParseInput(input string) (*[]Column, error) {
 
 func createColumn(raw string) (Column, error) {
 	badChars := ".,;':/\\*|?&%$!+=()[]{}<>"
-	validTypes := []string{"STRING", "INTEGER", "DATETIME"}
+	validTypes := []string{"STRING", "NUMBER", "DATE"}
 	formatError := errors.New("incorrect format in input. expecting: table_name[column_name],type")
-	invalidTypeError := errors.New("invalid type in input. expecting : STRING, INTEGER, DATETIME")
+	invalidTypeError := errors.New("invalid type in input. expecting : STRING, NUMBER, DATE")
 	badCharError := errors.New("invalid characters in input")
 	infError := errors.New("column/table name cannot begin with \"INF\"")
 	var col Column
@@ -95,38 +95,18 @@ func GenerateDax(cols *[]Column) (string, error) {
 		urlTable := strings.ReplaceAll(col.tableName, " ", "_x0020_")
 		urlColumn := strings.ReplaceAll(col.columnName, " ", "_x0020_")
 		daxLink += fmt.Sprintf("V%d,", i)
-		dax += fmt.Sprintf(
-			`VAR V%d =
-    IF(
-        ISFILTERED( %s ) = TRUE(),
-        VAR vals = SELECTCOLUMNS(ADDCOLUMNS(VALUES( %s ), "clean",
-            SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(%s,
-                " ", "%%20"),
-                "'", """"),
-                "%%", "%%25"),
-                "+", "%%2B"),
-                "/", "%%2F"),
-                "?", "%%3F"),
-                "#", "%%23"),
-                "&", "%%26")
-            ), "clean", [clean])
-        VAR cnt = COUNTROWS(vals)
-        VAR valsStr = IF(cnt = 1, "eq%%20%%27" & vals & "%%27", "in%%20(%%27" & CONCATENATEX(vals, [clean], "%%27,%%20%%27") & "%%27)")
-        VAR fullStr = "%s/%s%%20" & valsStr
-        VAR fullStrBlank = IF(valsStr = BLANK(), BLANK(), fullStr)
-    RETURN
-        fullStrBlank,   
-        BLANK()
-    )
+		switch col.columnType {
+		case "STRING":
+			dax += fmt.Sprintf(templateString, i, col.fullName, col.fullName, col.fullName, urlTable, urlColumn)
+		case "DATE":
+			dax += fmt.Sprintf(templateDate, i, col.fullName, col.fullName, urlTable, urlColumn, col.fullName, urlTable, urlColumn)
+		case "NUMBER":
+			dax += fmt.Sprintf(templateNum, i, col.fullName, col.fullName, col.fullName, col.fullName, urlTable, urlColumn, col.fullName, urlTable, urlColumn)
+		default:
+			return "", errors.New("invalid column type")
+		}
 
-`, i, col.fullName, col.fullName, col.fullName, urlTable, urlColumn)
 	}
-	fullDax := fmt.Sprintf(
-		`%s
-VAR link = CONCATENATEX(FILTER({%s}, [Value] <> BLANK()), [Value], "%%20and%%20")
-VAR fullLink = IF(link = BLANK(), BLANK(), [Dashboard Link] & "?rs:embed=true&filter=" & link)
-RETURN
-	fullLink
-`, dax, string([]rune(daxLink)[:len(daxLink)-1]))
+	fullDax := fmt.Sprintf(templateEnd, dax, string([]rune(daxLink)[:len(daxLink)-1]))
 	return fullDax, nil
 }

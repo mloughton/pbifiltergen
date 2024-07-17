@@ -65,10 +65,11 @@ h2 {
   border-bottom: 1px solid #ccc;
 
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 3fr)  minmax(0, 4fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
   height: 100%;
   width: 100%;
+  align-items: center;
 }
 
 .inputtitle {
@@ -76,12 +77,12 @@ h2 {
   grid-row: 1;
 }
 
-.buttonbox {
+.errorbox {
   grid-column: 2;
   grid-row: 1;
 }
 
-.errorbox {
+.buttonbox {
   grid-column: 3;
   grid-row: 1;
 }
@@ -109,10 +110,11 @@ h2 {
   border-bottom: 1px solid #ccc;
 
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 3fr)  minmax(0, 4fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
   height: 100%;
   width: 100%;
+  align-items: center;
 }
 
 .inputtitle {
@@ -120,12 +122,12 @@ h2 {
   grid-row: 1;
 }
 
-.copybox {
+.messagebox {
   grid-column: 2;
   grid-row: 1;
 }
 
-.messagebox {
+.copybox {
   grid-column: 3;
   grid-row: 1;
 }
@@ -175,6 +177,7 @@ pre {
   tab-size: 4;
   background-color: #252526;
   font-family: monospace;
+  caret-color: transparent;
 }
 
 .error {
@@ -186,4 +189,16 @@ button {
   height: 100%;
   font-weight: bold;
   font-size: 16;
+}
+
+button:hover {
+  background-color: #252526;
+}
+
+.message {
+  padding: 10;
+  tab-size: 4;
+  font-family: monospace;
+  caret-color: transparent;
+  text-align: right;
 }

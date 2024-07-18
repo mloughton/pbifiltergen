@@ -19,11 +19,23 @@
     <section class="app">
 
         <div class="header">
-            <div class="title">
-                pbifiltergen
+            <div class="titlebox">
+                <div class="title">
+                    pbifiltergen
+                </div>
+                <div class="subtitle">
+                    generate DAX that creates filtered Power BI dashboard links
+                </div>
             </div>
-            <div class="subtitle">
-                generate DAX that creates filtered Power BI dashboard links
+            <div class="infobox">
+                <p class="info">
+                    This tool converts a list of Power BI table columns into a dax measure that will generate 
+                    a pre-filtered dashboard link with the current applied filters on the input columns.
+                    Examples can be found on <a href="https://github.com/mloughton/pbifiltergen" target="_blank">Github</a>.<br>
+                    <br>
+                    Enter a list of columns in the format: TABLE_NAME[COLUMN_NAME],COLUMN_TYPE <br>
+                    Supported types: STRING, DATE, NUMBER
+                </p>
             </div>
         </div>
         <div class="inputcol border">

@@ -1,3 +1,5 @@
+/* global */
+
 *{
   margin: 0;
   background-color: #1e1e1e;
@@ -5,30 +7,14 @@
   color: #ccc;
   font-family: 'Segoe UI';
   box-sizing: border-box;
-  border: unset
+  border: unset;
+  caret-color: transparent;
 }
 
 body {
-  margin-top: 10;
-  margin-bottom: 10;
-}
-
-.title {
-  font-size: 36;
-  font-weight: bold;
-}
-
-.headertitle {
-  font-size: 24;
-  font-weight: bold;
-}
-
-.subtitle {
-  font-size: 20;
-}
-
-.info {
-  font-size: 16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 a {
@@ -36,20 +22,81 @@ a {
   color: #26BE7F;
 }
 
-h2 {
-  font-size: 20;
-  font-weight: normal;
+pre {
+  padding: 10;
+  width: 100%;
+  height: 100%;
+  tab-size: 4;
+  background-color: #252526;
+  font-family: monospace;
+  caret-color: transparent;
 }
 
+textarea {
+  padding: 10;
+  width: 100%;
+  height: 100%;
+  tab-size: 4;
+  background-color: #252526;
+  font-family: monospace;
+}
+
+textarea:focus {
+  outline: none
+}
+
+textarea::placeholder {
+  color: #459b42
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  font-size: 16;
+}
+
+button:hover {
+  background-color: #252526;
+}
+
+.error {
+  color: #f15959;
+}
+
+.scrollable {
+  resize: none;
+  overflow-y: auto;
+}
+
+.border {
+  border: 1px solid #ccc;
+}
+
+.message {
+  padding: 10;
+  tab-size: 4;
+  font-family: monospace;
+  caret-color: transparent;
+  text-align: right;
+}
+
+.headertitle {
+  font-size: 24;
+  font-weight: bold;
+}
+
+/* layout */
 .app {
   position: absolute;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 15fr) minmax(0, 2fr) auto;
-  height: 100%;
-  width: 100%;
+  height: 900px;
+  width: 1920px;
 }
 
+/* header */
 .header {
   grid-column: 1 / 3;
   grid-row: 1;
@@ -67,12 +114,27 @@ h2 {
   padding: 10;
 }
 
+.title {
+  font-size: 36;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 20;
+}
+
 .infobox {
   grid-column: 2;
   grid-row: 1;
   padding: 10;
 }
 
+.info {
+  font-size: 16;
+}
+
+
+/* input/output */
 .inputcol {
   grid-column: 1;
   grid-row: 2;
@@ -84,6 +146,18 @@ h2 {
   width: 100%;
 }
 
+.outputcol {
+  grid-column: 2;
+  grid-row: 2;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr)  minmax(0, 9fr);
+  height: 100%;
+  width: 100%;
+}
+
+/* input */
 .inputheader {
   grid-column: 1;
   grid-row: 1;
@@ -116,19 +190,10 @@ h2 {
 .inputbox {
   grid-column: 1;
   grid-row: 2;
+  caret-color: #ccc;
 }
 
-.outputcol {
-  grid-column: 2;
-  grid-row: 2;
-
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr)  minmax(0, 9fr);
-  height: 100%;
-  width: 100%;
-}
-
+/* output */
 .outputheader {
   grid-column: 1;
   grid-row: 1;
@@ -163,68 +228,10 @@ h2 {
   grid-row: 2;
 }
 
+/* footer */
 .footer {
   grid-column: 1 / 3;
   grid-row: 3;
   margin-left: 10;
   margin-right: 10;
-}
-
-.scrollable {
-  resize: none;
-  overflow-y: auto;
-}
-
-.border {
-  border: 1px solid #ccc;
-}
-
-textarea:focus {
-  outline: none
-}
-
-textarea {
-  padding: 10;
-  width: 100%;
-  height: 100%;
-  tab-size: 4;
-  background-color: #252526;
-  font-family: monospace;
-}
-
-::placeholder {
-  color: #459b42
-}
-
-pre {
-  padding: 10;
-  width: 100%;
-  height: 100%;
-  tab-size: 4;
-  background-color: #252526;
-  font-family: monospace;
-  caret-color: transparent;
-}
-
-.error {
-  color: #f15959;
-}
-
-button {
-  width: 100%;
-  height: 100%;
-  font-weight: bold;
-  font-size: 16;
-}
-
-button:hover {
-  background-color: #252526;
-}
-
-.message {
-  padding: 10;
-  tab-size: 4;
-  font-family: monospace;
-  caret-color: transparent;
-  text-align: right;
 }

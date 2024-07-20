@@ -6,7 +6,7 @@
     <script src="js/htmx.min.js"></script>
     <script>
         function getZoom() {
-            document.documentElement.style.setProperty('--zoom', (( window.outerWidth - 10 ) / window.innerWidth));
+            document.querySelector(':root').style.setProperty('--zoom', ((window.outerWidth - 20) / window.innerWidth));
         }
 
         function clear() {
@@ -21,6 +21,7 @@
     </script>
 </head>
 <body onresize="getZoom()">
+    <script>getZoom()</script>
     <div id="app" class="app">
         <div class="header">
             <div class="titlebox">

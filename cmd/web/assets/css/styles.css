@@ -1,5 +1,9 @@
 /* global */
 
+:root {
+  --zoom: 1.0
+}
+
 *{
   margin: 0;
   background-color: #1e1e1e;
@@ -86,14 +90,18 @@ button:hover {
   font-weight: bold;
 }
 
+.caret {
+  caret-color: #ccc;
+}
+
 /* layout */
 .app {
   position: absolute;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 15fr) minmax(0, 2fr) auto;
-  height: 900px;
-  width: 1920px;
+  height: calc(100vh * var(--zoom));
+  width: calc(100vw * var(--zoom));
 }
 
 /* header */
@@ -190,7 +198,6 @@ button:hover {
 .inputbox {
   grid-column: 1;
   grid-row: 2;
-  caret-color: #ccc;
 }
 
 /* output */

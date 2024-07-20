@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/htmx.min.js"></script>
     <script>
+        function getZoom() {
+            document.documentElement.style.setProperty('--zoom', (( window.outerWidth - 10 ) / window.innerWidth));
+        }
+
         function clear() {
             document.getElementById('error').innerHTML = '';
             document.getElementById('message').innerHTML = '';
@@ -16,7 +20,7 @@
         }
     </script>
 </head>
-<body>
+<body onresize="getZoom()">
     <div id="app" class="app">
         <div class="header">
             <div class="titlebox">
@@ -57,7 +61,7 @@
                 </div>
             </div>
             <div class="inputbox">
-                <textarea class="scrollable" type="text" name="input" id="input" placeholder="// TABLE_NAME[COLUMN_NAME],COLUMN_TYPE"></textarea>
+                <textarea class="scrollable caret" type="text" name="input" id="input" placeholder="// TABLE_NAME[COLUMN_NAME],COLUMN_TYPE"></textarea>
             </div>
         </div>
 

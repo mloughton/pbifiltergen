@@ -7,6 +7,14 @@ import (
 	"strings"
 )
 
+var (
+	errEmptyInput  = errors.New("empty input")
+	errFormat      = errors.New("incorrect format in input. expecting: table_name[column_name],type")
+	errInvalidType = errors.New("invalid type in input. expecting : STRING, NUMBER, DATE")
+	errBadChar     = errors.New("invalid characters in input")
+	errINF         = errors.New("column/table name cannot begin with \"INF\"")
+)
+
 type Column struct {
 	fullName   string
 	tableName  string
@@ -17,7 +25,7 @@ type Column struct {
 func ParseInput(input string) (*[]Column, error) {
 	input = strings.TrimSpace(input)
 	if len(input) == 0 {
-		return nil, errors.New("empty input")
+		return nil, errEmptyInput
 	}
 	lines := strings.Split(input, "\n")
 	columns := []Column{}
@@ -35,50 +43,46 @@ func ParseInput(input string) (*[]Column, error) {
 func createColumn(raw string) (Column, error) {
 	badChars := ".,;':/\\*|?&%$!+=()[]{}<>"
 	validTypes := []string{"STRING", "NUMBER", "DATE"}
-	formatError := errors.New("incorrect format in input. expecting: table_name[column_name],type")
-	invalidTypeError := errors.New("invalid type in input. expecting : STRING, NUMBER, DATE")
-	badCharError := errors.New("invalid characters in input")
-	infError := errors.New("column/table name cannot begin with \"INF\"")
 	var col Column
 	tableColType := strings.Split(raw, ",")
 	if len(tableColType) != 2 {
-		return col, formatError
+		return col, errFormat
 	}
 	colType := tableColType[1]
 	if !slices.Contains(validTypes, colType) {
-		return col, invalidTypeError
+		return col, errInvalidType
 	}
 	fullCol := tableColType[0]
 	tableCol := strings.Split(fullCol, "[")
 	if len(tableCol) != 2 {
-		return col, formatError
+		return col, errFormat
 	}
 
 	table := []rune(tableCol[0])
 	if string(table[:3]) == "INF" {
-		return col, infError
+		return col, errINF
 	}
 	if table[0] == '\'' && table[len(table)-1] == '\'' {
 		table = table[1 : len(table)-1]
 		if strings.ContainsAny(string(table), badChars) {
-			return col, badCharError
+			return col, errBadChar
 		}
 	} else {
 		if strings.ContainsAny(string(table), badChars+" ") {
-			return col, badCharError
+			return col, errBadChar
 		}
 	}
 
 	column := []rune(tableCol[1])
 	if string(column[:3]) == "INF" {
-		return col, infError
+		return col, errINF
 	}
 	if column[len(column)-1] != ']' {
-		return col, formatError
+		return col, errFormat
 	}
 	column = column[:len(column)-1]
 	if strings.ContainsAny(string(column), badChars) {
-		return col, badCharError
+		return col, errBadChar
 	}
 
 	col.fullName = fullCol
@@ -103,7 +107,7 @@ func GenerateDax(cols *[]Column) (string, error) {
 		case "NUMBER":
 			dax += fmt.Sprintf(templateNum, i, col.fullName, col.fullName, col.fullName, col.fullName, urlTable, urlColumn, col.fullName, urlTable, urlColumn)
 		default:
-			return "", errors.New("invalid column type")
+			return "", errInvalidType
 		}
 
 	}

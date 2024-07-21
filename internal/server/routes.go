@@ -34,7 +34,10 @@ func AppHandler(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	w.Write(f)
+	_, err = w.Write(f)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func GetHealthHandler(w http.ResponseWriter, r *http.Request) {
@@ -57,14 +60,23 @@ func PostInputHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		// respondWithError(w, http.StatusBadRequest, "Bad Request")
 		w.Header().Add("HX-Retarget", "#error")
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	dax, err := dax.GenerateDax(columns)
 	if err != nil {
 		w.Header().Add("HX-Retarget", "#error")
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
-	w.Write([]byte(dax))
+	_, err = w.Write([]byte(dax))
+	if err != nil {
+		log.Fatal(err)
+	}
 }

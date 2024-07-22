@@ -28,7 +28,7 @@ a {
 }
 
 pre {
-  padding: 1%;
+  padding: 10px;
   width: 100%;
   height: 100%;
   tab-size: 4;
@@ -39,7 +39,7 @@ pre {
 }
 
 textarea {
-  padding: 10;
+  padding: 10px;
   width: 100%;
   height: 100%;
   tab-size: 4;
@@ -61,6 +61,7 @@ button {
   height: 100%;
   font-weight: bold;
   font-size: 1.33rem;
+  padding: 10%;
 }
 
 button:hover {
@@ -81,7 +82,7 @@ button:hover {
 }
 
 .message {
-  padding: 10;
+  padding: 2%;
   tab-size: 4;
   font-family: monospace;
   caret-color: transparent;
@@ -123,7 +124,7 @@ button:hover {
 .titlebox {
   grid-column: 1;
   grid-row: 1;
-  padding: 10;
+  padding: 10px;
 }
 
 .title {
@@ -138,7 +139,7 @@ button:hover {
 .infobox {
   grid-column: 2;
   grid-row: 1;
-  padding: 10;
+  padding: 10px;
 }
 
 .info {
@@ -208,7 +209,7 @@ button:hover {
 .outputheader {
   grid-column: 1;
   grid-row: 1;
-  padding: 1%;
+  padding: 10px;
   border-bottom: 1px solid #ccc;
 
   display: grid;

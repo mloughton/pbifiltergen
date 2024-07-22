@@ -10,7 +10,7 @@ import (
 var (
 	errEmptyInput  = errors.New("empty input")
 	errFormat      = errors.New("incorrect format in input. expecting: table_name[column_name],type")
-	errInvalidType = errors.New("invalid type in input. expecting : STRING, NUMBER, DATE")
+	errInvalidType = errors.New("invalid type in input. expecting : STRING, INTEGER, DATE")
 	errBadChar     = errors.New("invalid characters in input")
 	errINF         = errors.New("column/table name cannot begin with \"INF\"")
 )
@@ -42,7 +42,7 @@ func ParseInput(input string) (*[]Column, error) {
 
 func createColumn(raw string) (Column, error) {
 	badChars := ".,;':/\\*|?&%$!+=()[]{}<>"
-	validTypes := []string{"STRING", "NUMBER", "DATE"}
+	validTypes := []string{"STRING", "INTEGER", "DATE"}
 	var col Column
 	tableColType := strings.Split(raw, ",")
 	if len(tableColType) != 2 {
@@ -104,8 +104,8 @@ func GenerateDax(cols *[]Column) (string, error) {
 			dax += fmt.Sprintf(templateString, i, col.fullName, col.fullName, col.fullName, urlTable, urlColumn)
 		case "DATE":
 			dax += fmt.Sprintf(templateDate, i, col.fullName, col.fullName, urlTable, urlColumn, col.fullName, urlTable, urlColumn)
-		case "NUMBER":
-			dax += fmt.Sprintf(templateNum, i, col.fullName, col.fullName, col.fullName, col.fullName, urlTable, urlColumn, col.fullName, urlTable, urlColumn)
+		case "INTEGER":
+			dax += fmt.Sprintf(templateInt, i, col.fullName, col.fullName, col.fullName, col.fullName, urlTable, urlColumn, col.fullName, urlTable, urlColumn)
 		default:
 			return "", errInvalidType
 		}

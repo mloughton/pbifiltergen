@@ -9,35 +9,24 @@ import (
 	"github.com/mloughton/pbifiltergen/internal/dax"
 )
 
-func RegisterRoutes() http.Handler {
+func (s *Server) RegisterRoutes() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /health", GetHealthHandler)
 
-	mux.Handle("/", AppHandlerTest())
+	mux.Handle("/", AppHandler())
 
-	mux.HandleFunc("POST /input", PostInputHandler)
+	mux.HandleFunc("POST /input", s.limit(PostInputHandler))
 
 	return mux
 }
 
-func AppHandlerTest() http.Handler {
+func AppHandler() http.Handler {
 	fs, err := fs.Sub(embedfs.StaticFiles, "assets")
 	if err != nil {
 		panic(err)
 	}
 	return http.FileServer(http.FS(fs))
-}
-func AppHandler(w http.ResponseWriter, r *http.Request) {
-	f, err := embedfs.StaticFiles.ReadFile("assets/index.html")
-	if err != nil {
-		respondWithError(w, http.StatusInternalServerError, err.Error())
-		return
-	}
-	_, err = w.Write(f)
-	if err != nil {
-		log.Fatal(err)
-	}
 }
 
 func GetHealthHandler(w http.ResponseWriter, r *http.Request) {

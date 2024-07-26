@@ -8,7 +8,13 @@ import (
 	"net/http"
 	"os"
 	"time"
+
+	"golang.org/x/time/rate"
 )
+
+type Server struct {
+	limiter *rate.Limiter
+}
 
 func NewServer() (*http.Server, error) {
 	host := ""
@@ -24,9 +30,13 @@ func NewServer() (*http.Server, error) {
 		return nil, errors.New("PORT environment variable not set")
 	}
 
+	server := Server{
+		limiter: rate.NewLimiter(rate.Every(500*time.Millisecond), 5),
+	}
+
 	serverHTTP := &http.Server{
 		Addr:              host + ":" + port,
-		Handler:           RegisterRoutes(),
+		Handler:           server.RegisterRoutes(),
 		ReadHeaderTimeout: time.Minute,
 	}
 	return serverHTTP, nil
